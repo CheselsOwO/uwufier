@@ -1,3 +1,7 @@
+/*
+    Just a heads up! This code was by two (very dumb) people
+    So expect some messy and faulty codes :)
+*/
 
 #include <iostream>
 #include <stdlib.h>
@@ -25,12 +29,21 @@ void OwOingString(std::string* stuwing, std::string seauwch,
 /*
 Main function of the program. (very useful info!)
 */
-int main()
+int main(int argc, char** argv)
 {
-    //input string
     std::string wowowds;
-
-    std::getline(std::cin, wowowds);
+    if (argc > 1) {
+        for (unsigned int i = 0; i < argc; i++) {
+            if (i == 0)
+                continue;
+            wowowds = wowowds + ' ' + argv[i];
+        }
+    }
+    else {
+        printf_s("Enter Your Text Here: ");
+        std::getline(std::cin, wowowds);
+    }
+ 
     //--uwuifyification--
 
     //sywwabwes and wowrds
@@ -72,7 +85,8 @@ int main()
     //--uwuifyification--
     
     std::cout << wowowds << '\n';
-    size_t strngLen{ wowowds.size() };
+    EmptyClipboard();
+    size_t strngLen{ (wowowds.size() + 1) * sizeof(char) };
     HGLOBAL hg = GlobalAlloc(GMEM_MOVEABLE, strngLen);
     memcpy(GlobalLock(hg), (wowowds.c_str()), strngLen);
     GlobalUnlock(hg);
